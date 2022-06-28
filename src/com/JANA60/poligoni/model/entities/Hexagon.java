@@ -4,22 +4,24 @@ public class Hexagon implements Poligon {
 	
 	double side;
 
-	String eMessage= "I dati inseriti non sono validi.";
+	
 	boolean validParameters=true;
 
 
-	public Hexagon(double side) throws Exception, NullPointerException, IllegalArgumentException {
+	public Hexagon(double side) throws Exception {
 		super();
+		String eMessage= "I dati inseriti non sono validi.";
 		try
 		{
 			hasValidSides(side);
 		}
-		catch(NullPointerException npe)
+		catch(Exception npe)
 		{
+			
 			validParameters=false;
 			eMessage+= "\n" + npe.getMessage();
 		}
-		if(validParameters=true)
+		if(validParameters==true)
 		{
 			this.side = side;
 		}
@@ -29,10 +31,10 @@ public class Hexagon implements Poligon {
 		}
 	}
 
-	private void hasValidSides(double side) throws NullPointerException, IllegalArgumentException
+	private void hasValidSides(double side) throws Exception
 	{
 		if (side==0)
-			throw new NullPointerException("I lati di un poligono non possono essere nulli o pari a 0");
+			throw new Exception("I lati di un poligono non possono essere nulli o pari a 0");
 		if (side<0)
 			throw new IllegalArgumentException("Non esistono poligoni con valori negativi");
 
@@ -42,7 +44,7 @@ public class Hexagon implements Poligon {
 		return side;
 	}
 
-	public void setSide(double side) {
+	public void setSide(double side) throws Exception {
 		hasValidSides(side);
 		this.side = side;
 	}
@@ -59,4 +61,14 @@ public class Hexagon implements Poligon {
 		return ( ((3* Math.sqrt(3))*(side*side)) /2);
 	}
 
+	public String toString()
+	{
+		return "Il esagono regolare di lato: "	+
+				side								+
+				" ha perimetro pari a "				+
+				getPerimeter()						+
+				" e area "							+
+				getArea()							+
+				"."									;
+	}
 }
